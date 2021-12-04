@@ -22,3 +22,11 @@ function initMap(){
 	}
 	map = new google.maps.Map(document.getElementById("map"), options)
 }
+
+function sendMessage(message) {
+	const messageDiv = document.getElementById('message-div');
+	messageDiv.classList.remove('run-animation');
+	messageDiv.textContent = message;
+	messageDiv.style.opacity = '1';
+	messageDiv.classList.add('run-animation');
+}
