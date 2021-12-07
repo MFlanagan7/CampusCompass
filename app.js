@@ -13,8 +13,13 @@ const UC_HAR6 = {lat: 35.65573007203257, lng: -97.47128543145136}; // second flo
 const UC_HAR7 = {lat: 35.655348678500296, lng: -97.47122105843604}; // second floor
 const UC_NON_HAR1 = {lat: 35.65468962019296, lng: -97.47175219220264}; // first floor
 const UC_NON_HAR2 = {lat: 35.65507950487029, lng: -97.47121061062671}; // first floor
-const UC_NON_HAR2 = {lat: 35.65556879727545, lng: -97.4718165088278}; // second floor
+const UC_NON_HAR3 = {lat: 35.65556879727545, lng: -97.4718165088278}; // second floor
 
+let LibHARs = [LIB_HAR1,LIB_HAR2];
+let MSCHARs = [MCS_HAR1];
+let MSCnonHARs = [MSC_NON_HAR1,MSC_NON_HAR2];
+let UCHARs = [UC_HAR1,UC_HAR2,UC_HAR3,UC_HAR4,UC_HAR5,UC_HAR6,UC_HAR7];
+let UCnonHARs = [UC_NON_HAR1,UC_NON_HAR2,UC_NON_HAR3];
 const LIB_HAR1 = {lat: 35.65836414769805, lng: -97.47334064142974};
 const LIB_HAR2 = {lat: 35.657987707399535, lng: -97.47371536172811};
 
@@ -63,4 +68,57 @@ function routing(location1, location2) {
 			directionsRenderer.setDirections(result);
 		  }
 	});
+}
+function chooseEntrance(origin,building,HARtoggle) {
+	var bestChoice;
+	var smallestTotalDifference = 1000;
+	var tempDifference;
+	if (building == 'UC') {
+		for (var i = 0; i < UCHARs.length;i++ ) {
+			tempDifference = Math.abs(UCHARs[i].lat - origin.lat) + Math.abs(UCHARs[i].lng - origin.lng);
+			if (tempDifference < smallestTotalDifference) {
+				smallestTotalDifference = tempDifference;
+				bestChoice = UCHARs[i];
+			}
+		}
+		if (!HARtoggle) {
+			for (var i = 0; i < UCnonHARs.length;i++ ) {
+				tempDifference = Math.abs(UCnonHARs[i].lat - origin.lat) + Math.abs(UCnonHARs[i].lng - origin.lng);
+				if (tempDifference < smallestTotalDifference) {
+					smallestTotalDifference = tempDifference;
+					bestChoice = UCnonHARs[i];
+				}
+			}
+		}
+	}
+	else if (building == 'MSC') {
+		for (var i = 0; i < MSCHARs.length;i++ ) {
+			tempDifference = Math.abs(MSCHARs[i].lat - origin.lat) + Math.abs(MSCHARs[i].lng - origin.lng);
+			if (tempDifference < smallestTotalDifference) {
+				smallestTotalDifference = tempDifference;
+				bestChoice = MSCHARs[i];
+			}
+		}
+		if (!HARtoggle) {
+			for (var i = 0; i < MSCnonHARs.length;i++ ) {
+				tempDifference = Math.abs(MSCnonHARs[i].lat - origin.lat) + Math.abs(MSCnonHARs[i].lng - origin.lng);
+				if (tempDifference < smallestTotalDifference) {
+					smallestTotalDifference = tempDifference;
+					bestChoice = MSCnonHARs[i];
+				}
+			}
+		}
+	}
+	else if (building == 'Lib') {
+		for (var i = 0; i < LibHARs.length;i++ ) {
+			tempDifference = Math.abs(LibHARs[i].lat - origin.lat) + Math.abs(LibHARs[i].lng - origin.lng);
+			if (tempDifference < smallestTotalDifference) {
+				smallestTotalDifference = tempDifference;
+				bestChoice = LibHARs[i];
+			}
+		}
+	}
+	if (bestChoice != null) {
+		routing(origin, bestChoice);
+	}
 }
