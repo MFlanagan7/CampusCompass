@@ -94,15 +94,15 @@ function chooseEntrance(origin,building,HARtoggle) {
 	var bestChoice;
 	var smallestTotalDifference = 1000;
 	var tempDifference;
-	if (building == 'UC') {
-		for (var i = 0; i < UCHARs.length;i++ ) {
+	if (building == 'NUC') { //route to Nigh University Center
+		for (var i = 0; i < UCHARs.length;i++ ) { //search HAR routes for best one
 			tempDifference = Math.abs(UCHARs[i].lat - origin.lat) + Math.abs(UCHARs[i].lng - origin.lng);
 			if (tempDifference < smallestTotalDifference) {
 				smallestTotalDifference = tempDifference;
 				bestChoice = UCHARs[i];
 			}
 		}
-		if (!HARtoggle) {
+		if (!HARtoggle) { //if HAR toggle is off, search nonHARs as well
 			for (var i = 0; i < UCnonHARs.length;i++ ) {
 				tempDifference = Math.abs(UCnonHARs[i].lat - origin.lat) + Math.abs(UCnonHARs[i].lng - origin.lng);
 				if (tempDifference < smallestTotalDifference) {
@@ -112,15 +112,15 @@ function chooseEntrance(origin,building,HARtoggle) {
 			}
 		}
 	}
-	else if (building == 'MSC') {
-		for (var i = 0; i < MSCHARs.length;i++ ) {
+	else if (building == 'CS Building') { //route to cs building
+		for (var i = 0; i < MSCHARs.length;i++ ) { //search HAR routes for best one
 			tempDifference = Math.abs(MSCHARs[i].lat - origin.lat) + Math.abs(MSCHARs[i].lng - origin.lng);
 			if (tempDifference < smallestTotalDifference) {
 				smallestTotalDifference = tempDifference;
 				bestChoice = MSCHARs[i];
 			}
 		}
-		if (!HARtoggle) {
+		if (!HARtoggle) { //if toggle is off, search nonHARs as well
 			for (var i = 0; i < MSCnonHARs.length;i++ ) {
 				tempDifference = Math.abs(MSCnonHARs[i].lat - origin.lat) + Math.abs(MSCnonHARs[i].lng - origin.lng);
 				if (tempDifference < smallestTotalDifference) {
@@ -130,7 +130,7 @@ function chooseEntrance(origin,building,HARtoggle) {
 			}
 		}
 	}
-	else if (building == 'Lib') {
+	else if (building == 'Library') { // route to library, only has HAR available
 		for (var i = 0; i < LibHARs.length;i++ ) {
 			tempDifference = Math.abs(LibHARs[i].lat - origin.lat) + Math.abs(LibHARs[i].lng - origin.lng);
 			if (tempDifference < smallestTotalDifference) {
@@ -147,26 +147,5 @@ function chooseEntrance(origin,building,HARtoggle) {
 function go() {
 	let useHAR = document.getElementById('HAR-toggle').checked;
 	let destination = document.getElementById('destination').value;
-	
-	if (destination == 'Library') {
-		// route to library
-		if (useHAR) {
-			// route to closest HAR node
-		} else {
-			// route to any closest node
-		}
-	} else if (destination == 'CS Building') {
-		// route to CS Building
-		if (useHAR) {
-			// route to closest HAR node
-		} else {
-			// route to any closest node
-		}
-	} else if (destination == 'NUC') {
-		//route to NUC
-		if (useHAR) {
-			// route to closest HAR node
-		} else {
-			// route to any closest node
-		}
+	chooseEntrance(origin,destination,useHAR);
 }
