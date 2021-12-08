@@ -24,6 +24,9 @@ let MSCnonHARs = [MSC_NON_HAR1,MSC_NON_HAR2];
 let UCHARs = [UC_HAR1,UC_HAR2,UC_HAR3,UC_HAR4,UC_HAR5,UC_HAR6,UC_HAR7];
 let UCnonHARs = [UC_NON_HAR1,UC_NON_HAR2,UC_NON_HAR3];
 
+let directionsService;
+let directionsRenderer;
+
 function initMap(){
 	var options = {
 		center: UCO,
@@ -45,8 +48,8 @@ function initMap(){
     	fullscreenControl: false
 	}
 	map = new google.maps.Map(document.getElementById("map"), options);
-	var directionsService = new google.maps.DirectionsService();
- 	var directionsRenderer = new google.maps.DirectionsRenderer();
+	directionsService = new google.maps.DirectionsService();
+ 	directionsRenderer = new google.maps.DirectionsRenderer();
 	directionsRenderer.setMap(map);
 }
 
