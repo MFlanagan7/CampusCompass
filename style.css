@@ -88,7 +88,7 @@ section {
 
 #map {
 	/* placeholder image */
-	background-image: url("./images/placeholder-map.jpg");
+	/* background-image: url("./images/placeholder-map.jpg"); */
 	margin: 20px;
 	height: 500px;
 	width: 500px;
