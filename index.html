@@ -29,7 +29,7 @@
 					<p class="har-switch-label">HAR Toggle</p>
 				
 					<label class="switch">
-						<input onchange="sendMessage('HAR Toggled')" type="checkbox">
+						<input id="HAR-toggle" onchange="sendMessage('HAR Toggled')" type="checkbox">
 						<span class="slider round"></span>
 					</label>
 				</div>
@@ -40,6 +40,9 @@
 						<option value="CS Building">Computer Science Building</option>
 						<option value="Library">Chambers Library</option>
 					</datalist>
+				</div>
+				<div class="go-div">
+					<button onclick="go()" type="button" class="btn btn-warning btn-lg">Go!</button>
 				</div>
 			</section>
 		</main>

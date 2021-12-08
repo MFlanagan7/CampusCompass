@@ -20,7 +20,8 @@ nav {
 }
 
 nav img {
-	margin: 10px 0;
+	width: 490px;
+	margin: 15px 0 0 0;
 }
 
 main {
@@ -40,7 +41,7 @@ main {
 	font-weight: bold;
 	position:absolute;
 	left:50%;
-	top:75%;
+	top:65%;
 	margin-left:-125px;
 	margin-top:-25px;
 }
@@ -79,6 +80,10 @@ section {
 	padding: 3px;
 	display: inline;
 	float: right;
+}
+
+.go-div {
+	text-align: center;
 }
 
 #map {
