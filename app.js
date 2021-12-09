@@ -208,7 +208,7 @@ function Compass() {
 			}
 		}
 		if (bestChoice != null) {
-			routing(origin, bestChoice);
+			this.routing(origin, bestChoice);
 		}
 	}
 }
