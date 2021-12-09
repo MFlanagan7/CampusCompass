@@ -139,37 +139,7 @@ function initMap(){
 // facade design pattern
 function Compass() {
 	
-	this.sendMessage = function sendMessage(message) {
-		const messageDiv = document.getElementById('message-div');
-		const HARToggle = document.getElementById('HAR-toggle');
-		const destinationDropDown = document.getElementById('destination');
-		const goButton = document.getElementById('go-button');
-	
-		// disable inputs while animation is taking place
-		HARToggle.disabled = true;
-		destinationDropDown.disabled = true;
-		goButton.disabled = true;
-	
-		// add animation class with appropriate message and reset opacity
-		messageDiv.classList.remove('run-animation');
-		messageDiv.textContent = message;
-		messageDiv.style.opacity = '1';
-		messageDiv.classList.add('run-animation');
-	
-		// delay until after animation is finished
-		const delay = 1000;
-		setTimeout(function() {
-			// after animation has completed, reenable inputs
-			HARToggle.disabled = false;
-			destinationDropDown.disabled = false;
-			goButton.disabled = false;
-	
-			// finished with animation, hide the message div
-			messageDiv.style.opacity = '0';
-			messageDiv.classList.remove('run-animation');
-		}, delay);
-	}
-	
+	// perform routing via maps api call based on user location and selected destination
 	this.routing = function routing(location1, location2) {
 		var request = {
 			origin: location1,
@@ -187,6 +157,7 @@ function Compass() {
 		});
 	}
 	
+	// determine best node to route to based on user inputs
 	this.chooseEntrance = function chooseEntrance(origin,building,HARtoggle) {
 		var bestChoice;
 		var smallestTotalDifference = 1000;
@@ -242,6 +213,38 @@ function Compass() {
 	}
 }
 
+// UI message helper function
+function sendMessage(message) {
+	const messageDiv = document.getElementById('message-div');
+	const HARToggle = document.getElementById('HAR-toggle');
+	const destinationDropDown = document.getElementById('destination');
+	const goButton = document.getElementById('go-button');
+
+	// disable inputs while animation is taking place
+	HARToggle.disabled = true;
+	destinationDropDown.disabled = true;
+	goButton.disabled = true;
+
+	// add animation class with appropriate message and reset opacity
+	messageDiv.classList.remove('run-animation');
+	messageDiv.textContent = message;
+	messageDiv.style.opacity = '1';
+	messageDiv.classList.add('run-animation');
+
+	// delay until after animation is finished
+	const delay = 1000;
+	setTimeout(function() {
+		// after animation has completed, reenable inputs
+		HARToggle.disabled = false;
+		destinationDropDown.disabled = false;
+		goButton.disabled = false;
+
+		// finished with animation, hide the message div
+		messageDiv.style.opacity = '0';
+		messageDiv.classList.remove('run-animation');
+	}, delay);
+}
+
 // tying it all together
 function go() {
 	let useHAR = document.getElementById('HAR-toggle').checked;
@@ -249,7 +252,7 @@ function go() {
 	var CampusCompass = new Compass();
 
 	if (!destination)
-		CampusCompass.sendMessage('Select a destination');
+		sendMessage('Select a destination');
 	else
 		CampusCompass.chooseEntrance(pos,destination,useHAR);
 }
