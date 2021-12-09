@@ -26,6 +26,7 @@ let UCnonHARs = [UC_NON_HAR1,UC_NON_HAR2,UC_NON_HAR3];
 
 let directionsService;
 let directionsRenderer;
+let pos;
 
 function initMap(){
 	infoWindow = new google.maps.InfoWindow();
@@ -34,7 +35,7 @@ function initMap(){
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(
 			(position) => {
-			const pos = {
+			pos = {
 				lat: position.coords.latitude,
 				lng: position.coords.longitude,
 			};
@@ -177,5 +178,5 @@ function go() {
 	let useHAR = document.getElementById('HAR-toggle').checked;
 	let destination = document.getElementById('destination').value;
 
-	chooseEntrance(origin,destination,useHAR);
+	chooseEntrance(pos,destination,useHAR);
 }
