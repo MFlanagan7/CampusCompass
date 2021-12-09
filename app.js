@@ -117,6 +117,10 @@ function routing(location1, location2) {
 		if (status == 'OK') {
 			directionsRenderer.setDirections(result);
 		  }
+		else {
+			console.log(status);
+			console.log(request);
+		}
 	});
 }
 
