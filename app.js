@@ -83,10 +83,12 @@ function sendMessage(message) {
 	const messageDiv = document.getElementById('message-div');
 	const HARToggle = document.getElementById('HAR-toggle');
 	const destinationDropDown = document.getElementById('destination');
+	const goButton = document.getElementById('go-button');
 
 	// disable inputs while animation is taking place
 	HARToggle.disabled = true;
 	destinationDropDown.disabled = true;
+	goButton.disabled = true;
 
 	// add animation class with appropriate message and reset opacity
 	messageDiv.classList.remove('run-animation');
@@ -100,6 +102,7 @@ function sendMessage(message) {
 		// after animation has completed, reenable inputs
 		HARToggle.disabled = false;
 		destinationDropDown.disabled = false;
+		goButton.disabled = false;
 
 		// finished with animation, hide the message div
 		messageDiv.style.opacity = '0';
@@ -182,5 +185,8 @@ function go() {
 	let useHAR = document.getElementById('HAR-toggle').checked;
 	let destination = document.getElementById('destination').value;
 
-	chooseEntrance(pos,destination,useHAR);
+	if (!destination)
+		sendMessage('Select a destination');
+	else
+		chooseEntrance(pos,destination,useHAR);
 }
