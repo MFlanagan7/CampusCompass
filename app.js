@@ -28,6 +28,31 @@ let directionsService;
 let directionsRenderer;
 
 function initMap(){
+	infoWindow = new google.maps.InfoWindow();
+
+	// Try HTML5 geolocation.
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(
+			(position) => {
+			const pos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude,
+			};
+
+			infoWindow.setPosition(pos);
+			infoWindow.setContent("Location found.");
+			infoWindow.open(map);
+			map.setCenter(pos);
+			},
+			() => {
+			handleLocationError(true, infoWindow, map.getCenter());
+			}
+		);
+	} else {
+		// Browser doesn't support Geolocation
+		handleLocationError(false, infoWindow, map.getCenter());
+	}
+
 	var options = {
 		center: UCO,
 		zoom: 17,
@@ -151,5 +176,6 @@ function chooseEntrance(origin,building,HARtoggle) {
 function go() {
 	let useHAR = document.getElementById('HAR-toggle').checked;
 	let destination = document.getElementById('destination').value;
+
 	chooseEntrance(origin,destination,useHAR);
 }
