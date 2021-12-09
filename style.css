@@ -29,6 +29,7 @@ main {
 }
 
 #message-div {
+	opacity: 0;
 	width:250px;
 	height:50px;
 	margin:0 auto;
@@ -48,12 +49,12 @@ main {
 
 /* animation for message-div */
 .run-animation {
-	animation:message-fade 1.5s 1;
-    -webkit-animation:message-fade 1.5s 1;
+	animation:message-fade 1s 1;
+    -webkit-animation:message-fade 1s 1;
     animation-fill-mode: forwards;
 
-    animation-delay:2s;
-    -webkit-animation-delay:1s; /* Safari and Chrome */
+    animation-delay:.25s;
+    -webkit-animation-delay:.25s; /* Safari and Chrome */
     -webkit-animation-fill-mode: forwards;
 }
 

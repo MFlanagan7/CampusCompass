@@ -95,7 +95,7 @@ function sendMessage(message) {
 	messageDiv.classList.add('run-animation');
 
 	// delay until after animation is finished
-	const delay = 3550;
+	const delay = 1000;
 	setTimeout(function() {
 		// after animation has completed, reenable inputs
 		HARToggle.disabled = false;
@@ -118,7 +118,7 @@ function routing(location1, location2) {
 			directionsRenderer.setDirections(result);
 		  }
 		else {
-			console.log(status);
+			console.log('Status: ' + status);
 			console.log(request);
 		}
 	});
